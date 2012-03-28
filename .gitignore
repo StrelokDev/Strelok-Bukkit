@@ -21,8 +21,10 @@
 /dist
 /manifest.mf
 
-# Mac filesystem dust
+# Filesystem dust
 /.DS_Store
+/Thumbs.db
+/.tmp
 
 # intellij
 *.iml
