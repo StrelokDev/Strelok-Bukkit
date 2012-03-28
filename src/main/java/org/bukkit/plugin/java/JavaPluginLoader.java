@@ -17,6 +17,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -50,6 +51,7 @@ public class JavaPluginLoader implements PluginLoader {
     protected final Pattern[] fileFilters = new Pattern[] { Pattern.compile("\\.jar$"), };
     protected final Map<String, Class<?>> classes = new HashMap<String, Class<?>>();
     protected final Map<String, PluginClassLoader> loaders = new HashMap<String, PluginClassLoader>();
+    protected final Map<String, List<String>> depencies = new HashMap<String, List<String>>();
 
     public JavaPluginLoader(Server instance) {
         server = instance;
@@ -119,7 +121,10 @@ public class JavaPluginLoader implements PluginLoader {
             if (current == null) {
                 throw new UnknownDependencyException(pluginName);
             }
+      //Liste les dépendances du plugin
+             depencies.get(pluginName).add(description.getName());
         }
+        depencies.put(description.getName(), new ArrayList<String>());
 
         PluginClassLoader loader = null;
         JavaPlugin result = null;
@@ -365,6 +370,7 @@ public class JavaPluginLoader implements PluginLoader {
             }
 
             loaders.remove(jPlugin.getDescription().getName());
+            for (String dependantPlugin : depencies.remove(jPlugin.getName()))
 
             if (cloader instanceof PluginClassLoader) {
                 PluginClassLoader loader = (PluginClassLoader) cloader;
