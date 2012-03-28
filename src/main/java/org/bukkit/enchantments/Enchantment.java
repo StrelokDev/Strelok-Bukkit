@@ -263,4 +263,16 @@ public abstract class Enchantment {
     public static Enchantment[] values() {
         return byId.values().toArray(new Enchantment[byId.size()]);
     }
+    
+    public boolean conflictsWith(ItemStack item) {
+        Map<Enchantment, Integer> enchantments = item.getEnchantments();
+        
+        for (Enchantment enchant : enchantments.keySet()) {
+            if (this.conflictsWith(enchant)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
