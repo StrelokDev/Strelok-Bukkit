@@ -1,5 +1,9 @@
 package org.bukkit;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import org.bukkit.block.Block;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
@@ -7,8 +11,8 @@ import org.bukkit.util.Vector;
 /**
  * Represents a 3-dimensional position in a world
  */
-public class Location implements Cloneable {
-    private World world;
+public class Location implements Cloneable, Serializable {
+    private transient World world;
     private double x;
     private double y;
     private double z;
@@ -45,7 +49,26 @@ public class Location implements Cloneable {
         this.pitch = pitch;
         this.yaw = yaw;
     }
-
+    
+    private void writeObject(ObjectOutputStream os){
+        try{
+            os.defaultWriteObject();
+            os.writeUTF(world.getName());
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    private void readObject(ObjectInputStream is){
+        try{
+            is.defaultReadObject();
+            String name = is.readUTF();
+            this.world = Bukkit.getWorld(name);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+              
     /**
      * Sets the world that this location resides in
      *
