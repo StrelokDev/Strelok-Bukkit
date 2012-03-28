@@ -198,6 +198,20 @@ public interface Server extends PluginMessageRecipient {
      * @return The name of the update folder
      */
     public File getUpdateFolderFile();
+    
+    /**
+     * Récupère le nom du dossier où sont stockés les plugins CraftBukkit
+     * 
+     * @return Name of plugins folder
+     */
+     public String getPluginsFolder();
+     
+     /**
+      * Récupère le nom du dossier où sont stockés les plugins CraftBukkit
+      * 
+      * @return Name of plugins folder
+      */
+      public File getPluginsFolderFile();
 
     /**
      * Gets the value of the connection throttle setting
