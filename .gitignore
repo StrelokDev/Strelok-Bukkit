@@ -2,6 +2,8 @@
 /.classpath
 /.project
 /.settings
+/.metadata
+/.lock
 
 # netbeans
 /nbproject
@@ -25,6 +27,7 @@
 /.DS_Store
 /Thumbs.db
 /.tmp
+/desktop.ini
 
 # intellij
 *.iml
