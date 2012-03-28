@@ -121,7 +121,7 @@ public class JavaPluginLoader implements PluginLoader {
             if (current == null) {
                 throw new UnknownDependencyException(pluginName);
             }
-      //Liste les dépendances du plugin
+      //Établie une liste des dépendances du plugin
              depencies.get(pluginName).add(description.getName());
         }
         depencies.put(description.getName(), new ArrayList<String>());
