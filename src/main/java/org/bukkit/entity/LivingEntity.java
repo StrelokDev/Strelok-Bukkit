@@ -269,4 +269,10 @@ public interface LivingEntity extends Entity {
      * @return A collection of {@link PotionEffect}s
      */
     public Collection<PotionEffect> getActivePotionEffects();
+    
+    /**
+     * 
+     * 
+     */
+    public boolean hasLineOfSight(Entity other);
 }
